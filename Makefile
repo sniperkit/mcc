@@ -1,9 +1,13 @@
+# to complete later
 NAME := mcc
-VERSION := v0.9.6
+VERSION := $(cat VERSION)
+
 CONFIG_SCHEMA_VERSION := v1.1.0
 SRCS      := $(shell find . -name '*.go' -type f)
-LDFLAGS   := -ldflags "-X github.com/qmu/mcc/controller.Version=$(VERSION) -X github.com/qmu/mcc/controller.ConfigSchemaVersion=$(CONFIG_SCHEMA_VERSION)"
-GH_UPLOAD := github-release upload --user qmu --repo $(NAME) --tag $(VERSION)
+LDFLAGS   := -ldflags "	-X github.com/sniperkit/snk.golang.mcc/controller.Version=$(VERSION) \
+						-X github.com/sniperkit/snk.golang.mcc/controller.ConfigSchemaVersion=$(CONFIG_SCHEMA_VERSION)"
+
+GH_UPLOAD := github-release upload --user sniperkit --repo $(NAME) --tag $(VERSION)
 
 .PHONY: version
 version:
@@ -11,39 +15,54 @@ version:
 
 .PHONY: run
 run:
-	go run $(LDFLAGS) *.go -c _example/example.yml
+	go run $(LDFLAGS) *.go -c ./_examples/simple/example.yml
 
 .PHONY: erd
 erd:
-	go-erd -path ./widget |dot -Tsvg > ./_build/widget_erd.svg
-	go-erd -path ./model |dot -Tsvg > ./_build/model_erd.svg
-	go-erd -path ./model/vector |dot -Tsvg > ./_build/vector_erd.svg
+	@mkdir -p ./shared/build
+	@go-erd -path ./pkg/widget |dot -Tsvg > ./shared/build/widget_erd.svg
+	@go-erd -path ./pkg/model |dot -Tsvg > ./shared/build/model_erd.svg
+	@go-erd -path ./model/vector |dot -Tsvg > ./shared/build/vector_erd.svg
 
 .PHONY: fmt
 fmt:
-	gofmt -s -w ./
+	gofmt -s -w ./pkg/... ./plugins/...
 
 .PHONY: clean
 clean:
-	rm -rf _build/ release/
+	rm -rf ./_build/ ./dist/ ./bin/
 
 .PHONY: build
-build:
-	glide install
-	mkdir -p _build
-	CGO_ENABLED="1" gox $(LDFLAGS) -osarch="windows/amd64 windows/386 linux/amd64 darwin/amd64 linux/386 darwin/386" -output="_build/${NAME}_${VERSION}_{{.OS}}_{{.Arch}}/{{.Dir}}"
+build: clean ## local build
+	@go build $(LDFLAGS) -o ./bin/$(NAME) ./cmd/$(NAME)
+
+.PHONY: install ## local install to GOBIN
+install: deps clean
+	@go install $(LDFLAGS) github.com/sniperkit/snk.golang.mcc/cmd/$(NAME)
+
+.PHONY: dist
+dist: deps clean ## dist builds before release
+	@mkdir -p ./dist
+	@rm -fR ./dist/*
+	CGO_ENABLED="1" gox $(LDFLAGS) -osarch="windows/amd64 windows/386 linux/amd64 darwin/amd64 linux/386 darwin/386" -output="dist/{{.Name}}_${VERSION}_{{.OS}}_{{.Arch}}/{{.Dir}}" ./cmd/...
+
+deps: ## ensure dependencies
+	@glide install --strip-vendor
 
 # test > textfile > cat > rm... this is necessary because screen would be flush during tests
 .PHONY: test
 test:
-	go test github.com/qmu/mcc/... -cover > _build/test.txt && cat _build/test.txt
-	@rm _build/test.txt
+	@mkdir -p ./bin/debug
+	@rm -f ./bin/debug/test.output
+	@go test ./pkg/... ./plugins/... -cover > ./bin/debug/test.output && cat ./bin/debug/test.output
 
 # same reason above
 .PHONY: bench
 bench:
-	go test github.com/qmu/mcc/... -bench . -benchmem > _build/bench.txt && cat _build/bench.txt
-	@rm _build/bench.txt
+	@mkdir -p ./bin/debug
+	@rm ./bin/debug/bench.txt
+	@go test ./pkg/... ./plugins/... -bench . -benchmem > ./bin/debug/bench.txt && cat ./bin/debug/bench.txt
+
 
 .PHONY: lines
 lines:
@@ -70,10 +89,10 @@ release:
 		--name $(VERSION)
 
 	cd release/ \
-		&& $(GH_UPLOAD) --name darwin_386_mcc --file ${NAME}_${VERSION}_darwin_386/mcc \
-		&& $(GH_UPLOAD) --name darwin_amd64_mcc --file ${NAME}_${VERSION}_darwin_amd64/mcc \
-		&& $(GH_UPLOAD) --name linux_386_mcc --file ${NAME}_${VERSION}_linux_386/mcc \
-		&& $(GH_UPLOAD) --name linux_amd64_mcc --file ${NAME}_${VERSION}_linux_amd64/mcc \
+		&& $(GH_UPLOAD) --name darwin_386_$(NAME) --file ${NAME}_${VERSION}_darwin_386/$(NAME) \
+		&& $(GH_UPLOAD) --name darwin_amd64_$(NAME) --file ${NAME}_${VERSION}_darwin_amd64/$(NAME) \
+		&& $(GH_UPLOAD) --name linux_386_$(NAME) --file ${NAME}_${VERSION}_linux_386/$(NAME) \
+		&& $(GH_UPLOAD) --name linux_amd64_$(NAME) --file ${NAME}_${VERSION}_linux_amd64/$(NAME) \
 		&& tar czvf ${NAME}_${VERSION}_darwin_amd64.tar.gz ${NAME}_${VERSION}_darwin_amd64/ \
 		&& $(GH_UPLOAD) --name ${NAME}_${VERSION}_darwin_amd64.tar.gz --file ${NAME}_${VERSION}_darwin_amd64.tar.gz \
 		&& echo openssl dgst -sha256 ${NAME}_${VERSION}_darwin_amd64.tar.gz

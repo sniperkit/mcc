@@ -2,13 +2,13 @@
 
 #
 
-[![GitHub release](https://img.shields.io/github/release/qmu/mcc.svg)](https://github.com/qmu/mcc/releases)
+[![GitHub release](https://img.shields.io/github/release/qmu/mcc.svg)](https://github.com/sniperkit/snk.golang.mcc/releases)
 
 mcc is a terminal dashboard easily configured by yaml. 
 
 ## Install
 
-Availabe on Mac and Linux. Fetch the [latest release](https://github.com/qmu/mcc/releases) for your platform.
+Availabe on Mac and Linux. Fetch the [latest release](https://github.com/sniperkit/snk.golang.mcc/releases) for your platform.
 
 #### macOS
 
@@ -22,7 +22,7 @@ brew upgrade mcc
 #### Linux
 
 ```bash
-sudo wget https://github.com/qmu/mcc/releases/download/v0.9.1/linux_amd64_mcc -O /usr/local/bin/mcc
+sudo wget https://github.com/sniperkit/snk.golang.mcc/releases/download/v0.9.1/linux_amd64_mcc -O /usr/local/bin/mcc
 sudo chmod +x /usr/local/bin/mcc
 ```
 
@@ -38,7 +38,7 @@ mcc -c path/to/mcc.yml
 
 ## Config
 
-See the [_examples](https://github.com/qmu/mcc/tree/master/_examples)
+See the [_examples](https://github.com/sniperkit/snk.golang.mcc/tree/master/_examples)
 
 ## Key Bindings
 

@@ -1,4 +1,4 @@
-package: github.com/qmu/mcc
+package: github.com/sniperkit/snk.golang.mcc
 import:
 - package: github.com/github/hub
   subpackages:
