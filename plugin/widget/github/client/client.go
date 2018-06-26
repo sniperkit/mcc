@@ -1,4 +1,4 @@
-package github
+package client
 
 import (
 	"context"
@@ -8,7 +8,6 @@ import (
 	// external
 	go_github "github.com/google/go-github/github"
 	"gopkg.in/src-d/go-git.v4"
-	// "github.com/k0kubun/pp"
 
 	// internal -core
 	"github.com/sniperkit/snk.golang.mcc/pkg/utils"

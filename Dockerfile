@@ -26,11 +26,11 @@ RUN apk add --no-cache --no-progress ${APK_BUILD}
 ## Copy source code in the container & build program
 #########################################################
 
-ARG SRC_VCS_URI=${SRC_VCS_URI:-"github.com/sniperkit/dataflowkit"}
-ARG SRC_PATH_PREFIX=${SRC_PATH_PREFIX:-"cmd/fetch.d"}
+ARG SRC_VCS_URI=${SRC_VCS_URI:-"github.com/sniperkit/snk.golang.mcc"}
+ARG SRC_PATH_PREFIX=${SRC_PATH_PREFIX:-"cmd/mcc"}
 ARG SRC_PATH_FULL="${GOPATH}/${SRC_VCS_URI}/${SRC_PATH_PREFIX}"
 
-ARG APP_BINARY_NAME="${APP_BINARY_NAME:-"fetch.d"}"
+ARG APP_BINARY_NAME="${APP_BINARY_NAME:-"mcc"}"
 ARG APP_BINARY_PATH_FULL="${APP_BINARY_PATH_FULL:-"${SRC_PATH_FULL}/${APP_BINARY_NAME}"}"
 ARG APP_BINARY_PATH_BUILD="${APP_BINARY_PATH_BUILD:-"${APP_BINARY_PATH_FULL}/bin/${APP_BINARY_NAME}"}"
 
@@ -94,15 +94,15 @@ ARG OPT_DIR=${OPT_DIR:-"/opt"}
 ARG APP_USER=${APP_USER:-"snk"}
 
 # container - app
-ARG APP_NAME=${APP_NAME:-"dev-assitant"}
-ARG APP_PORT=${APP_PORT:-"2312"}
+ARG APP_NAME=${APP_NAME:-"mcc"}
+ARG APP_PORT=${APP_PORT:-"3615"}
 
 ARG APP_DIR=${APP_DIR:-"sniperkit"}
 ARG APP_SUBDIRS=${APP_SUBDIRS:-"bin config data"}
 ARG APP_HOME=${APP_HOME:-"${OPT_DIR}/${APP_DIR}"}
 
 ARG APP_CONF_PREFIX=${APP_CONF_PREFIX:-"${APP_HOME}/conf"}
-ARG APP_CONF=${APP_CONF:-"${APP_CONF_PREFIX}/config.yml"}
+ARG APP_CONF=${APP_CONF:-"${APP_CONF_PREFIX}/mcc.yml"}
 
 ARG APP_DATA=${APP_DATA:-"${APP_HOME}/data"}
 ARG APP_BIN_PREFIX=${APP_BIN_PREFIX:-"${APP_HOME}/bin"}

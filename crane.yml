@@ -1,18 +1,18 @@
 ---
 groups:
   app:
-  - dtk-splash
-  - dtk-fetch-d
-  - dtk-parse-d
+  - mcc-front
+  - mcc-api
   cli:
-  - dtk-fetch-cli
+  - snk-cli
+  - mcc-cli
   stores_kv:
-  - dtk-redis
+  - mcc-redis
 
 commands:
-  test: run dfk make test
-  build: run dfk make build
-  gofmt: run dfk gofmt -w crane
+  test: run mcc-cli make test
+  build: run mcc-cli make build
+  gofmt: run mcc-cli gofmt -w crane
 
 accelerated-mounts:
   crane:
