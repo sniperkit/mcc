@@ -1,3 +1,8 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package widget_github
 
 import (
@@ -11,7 +16,6 @@ import (
 
 	// internal - core
 	"github.com/sniperkit/snk.golang.mcc/pkg/widget/listable"
-
 	// internal - plugins
 	"github.com/sniperkit/snk.golang.mcc/plugin/widget/github"
 )

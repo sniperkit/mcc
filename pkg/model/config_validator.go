@@ -1,11 +1,14 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package model
 
 import (
 	"strconv"
-
 	// external
 	m2s "github.com/mitchellh/mapstructure"
-
 	// internal - core
 	"github.com/sniperkit/snk.golang.mcc/pkg/utils"
 	"github.com/sniperkit/snk.golang.mcc/pkg/widget"

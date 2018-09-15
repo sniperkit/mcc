@@ -1,8 +1,12 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package model
 
 import (
 	"testing"
-
 	// external
 	ui "github.com/gizak/termui"
 )

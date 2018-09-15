@@ -1,8 +1,12 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package widget
 
 import (
 	"os"
-
 	// external
 	ui "github.com/gizak/termui"
 	"github.com/hpcloud/tail"

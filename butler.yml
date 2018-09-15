@@ -1,3 +1,6 @@
+# Sniperkit-Bot
+# - Status: analyzed
+
 templates:
   - name: .NET Core
     url: https://github.com/netzkern/example-project-template.git

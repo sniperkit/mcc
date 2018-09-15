@@ -1,14 +1,16 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package widget
 
 import (
 	"errors"
-
 	// external
 	ui "github.com/gizak/termui"
-
 	// internal - core
 	"github.com/sniperkit/snk.golang.mcc/pkg/model/vector"
-
 	// internal - plugins
 	"github.com/sniperkit/snk.golang.mcc/plugin/widget/docker"
 	"github.com/sniperkit/snk.golang.mcc/plugin/widget/github"

@@ -1,9 +1,13 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package widget
 
 import (
 	// external
 	ui "github.com/gizak/termui"
-
 	// internal - plugin
 	"github.com/sniperkit/snk.golang.mcc/plugin/widget/github"
 )

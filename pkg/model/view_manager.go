@@ -1,3 +1,8 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package model
 
 import (
@@ -7,7 +12,6 @@ import (
 
 	// external
 	ui "github.com/gizak/termui"
-
 	// internal - core
 	"github.com/sniperkit/snk.golang.mcc/pkg/model/vector"
 	"github.com/sniperkit/snk.golang.mcc/pkg/utils"

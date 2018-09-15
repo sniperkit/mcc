@@ -1,3 +1,6 @@
+# Sniperkit-Bot
+# - Status: analyzed
+
 # image: docker:latest
 # services:
 #   - docker:dind

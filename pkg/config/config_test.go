@@ -1,12 +1,16 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package config
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
-
-	"fmt"
 
 	"github.com/stretchr/testify/assert"
 )

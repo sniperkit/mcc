@@ -1,11 +1,14 @@
+/*
+Sniperkit-Bot
+- Status: analyzed
+*/
+
 package controller
 
 import (
 	"path/filepath"
-
 	// external
 	ui "github.com/gizak/termui"
-
 	// internal - core
 	"github.com/sniperkit/snk.golang.mcc/model"
 	"github.com/sniperkit/snk.golang.mcc/widget"
